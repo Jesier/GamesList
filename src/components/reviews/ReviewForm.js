@@ -1,78 +1,91 @@
-import { useState } from "react"
-import { useNavigate } from "react-router"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router"
 
 export const ReviewForm = () => {
+    const [game, setGame] = useState({})
+    const { gameId } = useParams()
     const [review, update] = useState({
         description: "",
-        hide: false
+        hide: false,
     })
 
-const localGameUser = localStorage.getItem("game_user")
-const gameUserObject = JSON.parse(localGameUser)
-const navigate = useNavigate()
+    useEffect(() => {
+        fetch(`http://localhost:8088/games/${gameId}`)
+            .then(res => res.json())
+            .then((gameData) => {
+                setGame(gameData)
+            })
+    }, []
+    )
 
-const handleSaveButtonClick = (event) => {
-    event.preventDefault()
+    const localGameUser = localStorage.getItem("game_user")
+    const gameUserObject = JSON.parse(localGameUser)
+    const navigate = useNavigate()
 
-const reviewToSendToApi = {
-    userId: gameUserObject.id,
-    description: review.description,
-    hide: review.hide
-}
+    const handleSaveButtonClick = (event) => {
+        event.preventDefault()
 
-return fetch(`http://localhost:8088/reviews`, {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body:JSON.stringify(reviewToSendToApi)
-})
-.then (res => res.json())
-.then(() => {
-    navigate("/profile") //maybe this direction
-})
-}
+        const reviewToSendToApi = {
+            userId: gameUserObject.id,
+            description: review.description,
+            hide: review.hide,
+            gameName: game.name,
+            gameCover: game.cover
+        }
 
-return (
-    <form className="reviewForm">
-        <h2 className="reviewForm__title">New Review</h2>
-        <fieldset>
-            <div className="form-group">
-                <label htmlFor="description">Description:</label>
-                <input
-                    required autoFocus
-                    type="text"
-                    className="form-control"
-                    placeholder="Brief description of problem"
-                    value={review.description}
-                    onChange={
-                        (evt) => {
-                            const copy = {...review}
-                            copy.description = evt.target.value
-                            update(copy)
-                        }
-                    } />
-            </div>
-        </fieldset>
-        <fieldset>
-            <div className="form-group">
-                <label htmlFor="name">Emergency:</label>
-                <input type="checkbox"
-                    value={review.hide}
-                    onChange={
-                        (evt) => {
-                            const copy = {...review}
-                            copy.hide = evt.target.checked
-                            update(copy) //HAVE TO SET TO TRUE ON CHECK
-                        }
-                    } />
-            </div>
-        </fieldset>
-        <button
-        onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-        className="btn btn-primary">
-            Submit review
-        </button>
-    </form>
-)
+        return fetch(`http://localhost:8088/reviews`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify(reviewToSendToApi),
+        })
+            .then(res => res.json())
+            .then(() => {
+                navigate("/profile")
+            })
+    }
+
+    return (
+        <form className="reviewForm">
+            <h2 className="reviewForm__title">{game.name}</h2>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="description">Review</label>
+                    <input
+                        required autoFocus
+                        type="text"
+                        className="form-control"
+                        placeholder="What were your thoughts"
+                        value={review.description}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...review }
+                                copy.description = evt.target.value
+                                update(copy)
+                            }
+                        } />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="hide">Show?</label>
+                    <input type="checkbox"
+                        value={review.hide}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...review }
+                                copy.hide = evt.target.checked
+                                update(copy) 
+                            }
+                        } />
+                </div>
+            </fieldset>
+            <button
+                onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+                className="btn btn-primary">
+                Submit review
+            </button>
+        </form>
+    )
 }
