@@ -1,0 +1,95 @@
+.proback{
+    background: url("https://i.ibb.co/P6mh51p/njPhhkca.gif") no-repeat ;
+    background-size:cover ;
+    min-height: 100vh;
+
+}
+
+.reviews {
+    
+    display: grid;
+    grid-template-rows: 180px auto;
+    grid-column-gap: 40px;
+    padding-left: 30px;
+}
+.title {
+    color: #cecbcb;
+    font-weight: 400;
+    padding-left: 30px;
+}
+
+.review {
+    background-color: rgba(43, 47, 56, 0.952);
+border: 2px  black;
+margin: 1rem;
+
+}
+
+.link{
+    color: rgb(10, 129, 240)
+}
+
+.review_description {
+color: #cecbcb;
+}
+
+.btn_yee {
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: rgb(17, 23, 70);
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.btn_yee:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.btn_yee:active {
+    color: rgb(148, 58, 58)
+}
+
+.btn_yee:active:after {
+    background: transparent;
+}
+
+.btn_yee:hover:before {
+    opacity: 1;
+}
+
+.btn_yee:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(11, 49, 119);
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+

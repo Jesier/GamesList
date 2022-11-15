@@ -1,0 +1,14 @@
+.games {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: rgba(43, 47, 56, 0.952);
+    border: 2px  black;
+    padding:1rem;
+    margin: 1rem;
+}
+.title {
+    color: #cecbcb;
+   float: inline-start;
+}
+

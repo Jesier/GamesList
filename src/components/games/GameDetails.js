@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router"
+import './GameDetails.css'
 
 export const GameDetails = () => {
     const [game, setGame] = useState([])
@@ -20,10 +21,11 @@ const navigateToGameReview = (gameId) => {
 }
 
 return (<>
-    <h2>{game.name}</h2>
-    <div>{game.description}</div>
-    <div>{game.characters?.name}</div>
-    <button onClick={() => { navigateToGameReview(game.id)}}>Review</button>
+    <h2 className="title">{game.name}</h2>
+    <img className="img" src={game.cover} width="400"height="400"></img>
+    <div className="description">{game.description}</div>
+    <p>{game.characters?.name}</p>
+    <button className="btn_review" onClick={() => { navigateToGameReview(game.id)}}>Review</button>
     </>
 )
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import './GamesList.css'
 
 export const GamesList = () => {
     const [games, setGames] = useState([])
@@ -21,18 +22,18 @@ export const GamesList = () => {
     }
 
 return <>
-    <h2>GamesList</h2>
+    <h2 className="title">GamesList</h2>
 
     <article className="games">
         {
             games.map(
                 (game) => {
                     return <section key={game.id} className="game">
-                        <header>{
-                            <Link  >{game.name}</Link>
-                        }
+                        <header className="title">
+                            {game.name}
+                        
                             </header>
-                        <img src={game.cover} 
+                        <img src={game.cover } width="400px" height="400px"
                         onClick={() => {
                             navigateToGameDetails(game.id)
                         }}/>

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router"
+import './Register.css'
 
 export const Register = (props) => {
     const [user, setUser] = useState({
@@ -54,7 +55,7 @@ export const Register = (props) => {
     return (
         <main style={{ textAlign: "center" }}>
             <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Please Register for Honey Rae Repairs</h1>
+                <h1 className="h3 mb-3 font-weight-normal">Please Register for GamesList</h1>
                 <fieldset>
                     <label htmlFor="fullName"> Full Name </label>
                     <input onChange={updateUser}

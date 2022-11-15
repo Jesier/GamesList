@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
+import './Login.css'
 
 export const Login = () => {
     const [email, set] = useState("jesiersantiago@gmail.com")
@@ -18,7 +19,7 @@ export const Login = () => {
                         id: user.id,
                     }))
 
-                    navigate("/")
+                    navigate("/games")
                 }
                 else {
                     window.alert("Invalid login")
@@ -26,14 +27,14 @@ export const Login = () => {
             })
     }
 
-    return (
+    return (<body className="back">
         <main className="container--login">
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>GamesList</h1>
-                    <h2>Please sign in</h2>
+                    <h1 className="text">GamesList</h1>
+                    <h2 className="text">Please sign in</h2>
                     <fieldset>
-                        <label htmlFor="inputEmail"> Email address </label>
+                        <label className="emailL" htmlFor="inputEmail"> Email address </label>
                         <input type="email"
                             value={email}
                             onChange={evt => set(evt.target.value)}
@@ -49,8 +50,9 @@ export const Login = () => {
                 </form>
             </section>
             <section className="link--register">
-                <Link to="/register">Not a member yet?</Link>
+                <Link className="emailL" to="/register">Not a member yet?</Link>
             </section>
         </main>
+        </body>
     )
 }
