@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router"
+import "./ReviewForm.css"
 
 export const ReviewForm = () => {
     const [game, setGame] = useState({})
@@ -52,11 +53,9 @@ export const ReviewForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="description">Review</label>
-                    <input
+                    <textarea rows="2" cols="50" type="text"
                         required autoFocus
-                        type="text"
-                        className="form-control"
-                        placeholder="What were your thoughts"
+                        className="form-control2"
                         value={review.description}
                         onChange={
                             (evt) => {
@@ -69,7 +68,7 @@ export const ReviewForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="hide">Show?</label>
+                    <label htmlFor="hide">Hide?</label>
                     <input type="checkbox"
                         value={review.hide}
                         onChange={

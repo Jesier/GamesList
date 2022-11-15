@@ -1,0 +1,23 @@
+.navbar {
+    margin-top:-100px auto;
+    background: rgba(43, 47, 56, 0.952);
+    height: 30px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    
+}
+
+.navbar__item {
+    flex-basis: 20%;
+    list-style-type: none;
+    justify-content: center;
+}
+
+.navbar__link{
+    color: #cecbcb
+}
+
+.navbar__logout {
+    margin-left: auto;
+}
